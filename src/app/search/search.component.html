@@ -1,0 +1,17 @@
+<div class="container search">
+  <label>Search: </label>
+  <input type="text"
+  id="search-field"
+  class="form-control"
+  (keyup)="searchFn()"
+  [(ngModel)]="searchTerm"/>
+  <div id="search-dropdown" class="dropdown" *ngIf="searching">
+    <ul>
+      <li *ngFor="let p of products"
+      (click)="selectProduct(p)"
+      tabindex="0">
+        {{p.name }}
+      </li>
+    </ul>
+  </div>
+</div>

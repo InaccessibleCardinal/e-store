@@ -1,0 +1,86 @@
+<div class="filter-box">
+<h4>FILTERS:</h4>
+  <ul>
+    <li *ngFor="let cat of categories">
+      <button class="cat-filter"
+      [ngClass]="{selected: this.productsDisplayed === cat.toUpperCase()}"
+      (click)="filterByCat(cat)">
+        {{ cat }}
+      </button>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <button
+      class="cat-filter"
+      [ngClass]="{selected: sizeDisplayed === 17}"
+      (click)="laptopSizeFilter(17)"
+      >17-inch Laptops</button>
+    </li>
+    <li>
+      <button
+      class="cat-filter"
+      [ngClass]="{selected: sizeDisplayed === 16}"
+      (click)="laptopSizeFilter(16)"
+      >16-inch Laptops</button>
+    </li>
+    <li>
+      <button
+      class="cat-filter"
+      [ngClass]="{selected: sizeDisplayed === 15}"
+      (click)="laptopSizeFilter(15)"
+      >15-inch Laptops</button>
+    </li>
+    <li>
+      <button
+      class="cat-filter"
+      [ngClass]="{selected: sizeDisplayed === 14}"
+      (click)="laptopSizeFilter(14)"
+      >14-inch Laptops</button>
+    </li>
+  </ul>
+  <div>
+    <button class="cat-filter price"
+    (click)="sortPrice()">
+      Price: {{ priceSortVar }}
+    </button>
+  </div>
+  <ul>
+    <li>
+      <label>Eco-Friendly:</label>
+      <input type="checkbox"
+      class="feature-filters"
+      [(ngModel)]="featureFilter['eco-friendly']"
+      [value]="'eco-friendly'"
+      (change)="updateFeatureFilter($event)"/>
+    </li>
+    <li>
+      <label>Multi-Device:</label>
+      <input type="checkbox"
+      class="feature-filters"
+      [(ngModel)]="featureFilter['multi-device']"
+      [value]="'multi-device'"
+      (change)="updateFeatureFilter($event)"/>
+    </li>
+    <li>
+      <label>Weather Resistant:</label>
+      <input type="checkbox"
+      class="feature-filters"
+      [(ngModel)]="featureFilter['weather-resistant']"
+      [value]="'weather-resistant'"
+      (change)="updateFeatureFilter($event)"/>
+    </li>
+    <li>
+      <label>Best Protection:</label>
+      <input type="checkbox"
+      class="feature-filters"
+      [(ngModel)]="featureFilter.protection"
+      [value]="'protection'"
+      (change)="updateFeatureFilter($event)"/>
+    </li>
+  </ul>
+  <button class="cat-filter clear"
+  (click)="clearFilters()">
+    Clear Filters
+  </button>
+</div>

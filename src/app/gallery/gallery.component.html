@@ -1,0 +1,16 @@
+<div>
+  <div class="main-image">
+    <img id="main"
+    src="assets/images/{{ selectedImage }}"/>
+  </div>
+  <div class="thumbnails">
+    <ul>
+      <li>
+        <img *ngFor="let im of product.images" width="100px"
+        [ngClass]="{'selected-image': selectedImage === im}"
+        src="assets/images/{{im}}"
+        (click)="selectImage(im)"/>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container" *ngIf="!cartExists">
+  <h2>Your Shopping Cart is Empty</h2>
+</div>
+<div class="container" *ngIf="cartExists">
+<h2>Your Shopping Cart</h2>
+  <div class="cart-line" *ngFor="let item of lines">
+    <h4>{{ item.product.name }} | {{ item.product.price }}</h4>
+    <img src="assets/images/{{ item.product.images[0] }}"
+    width="50px"/>
+    <input #quantity type="number"
+    min="1"
+    [(ngModel)]="item.quantity"
+    (change)="update(item,quantity.value)"/>
+    <button class="btn btn-danger"
+    (click)="remove(item)">Remove?</button>
+  </div>
+  <div class="total-box">
+    <span>TOTAL:</span> {{ total.toFixed(2) }}
+    <button class="btn btn-danger"
+    (click)="empty()">
+      Empty Cart
+    </button>
+  </div>
+</div>
+<div class="container" *ngIf="cartExists">
+  <h2>Login or Sign-up to Checkout!</h2>
+  <button class="btn btn-success btn-center"
+  (click)="goToLogin()">
+    Checkout
+  </button>
+</div>

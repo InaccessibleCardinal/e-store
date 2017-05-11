@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Checkout</h2>
+  <span>Need to edit? <a routerLink="/cart">Go Back</a></span>
+</div>
+<div class="container">
+  <div *ngFor="let line of lines">
+  <h4>{{ line.product.name }} @ {{ line.product.price }}</h4>
+  <p>Quantity: {{ line.quantity }}</p>
+  </div>
+  <div>Total: {{ total.toFixed(2) }}</div>
+</div>
+<div class="container">
+  <h3>Your Shipping Information:</h3>
+<form #orderForm='ngForm' (ngSubmit)="submitOrder()">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName"/>
+    <label>Last Name</label>
+    <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName"/>
+  </div>
+  <div class="form-group">
+    <label>Street</label>
+    <input type="text" class="form-control" [(ngModel)]="user.address.street" name="addressStreet"/>
+    <label>House/Unit Number</label>
+    <input type="text" class="form-control" [(ngModel)]="user.address.number" name="addressNumber"/>
+    <label>City</label>
+    <input type="text" class="form-control" [(ngModel)]="user.address.city" name="addressCity"/>
+    <label>State</label>
+    <input type="text" class="form-control" [(ngModel)]="user.address.state" name="addressState"/>
+    <label>Zip</label>
+    <input type="text" class="form-control" [(ngModel)]="user.address.zip" name="addressZip"/>
+  </div>
+  <button type="submit" [disabled]="!orderForm.valid" class="btn btn-primary">Submit</button>
+</form>
+</div>

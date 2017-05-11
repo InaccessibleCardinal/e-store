@@ -1,0 +1,43 @@
+<div class="container top">
+  <a routerLink="" id="goback">Go back</a>
+</div>
+<div class="container top" *ngIf="loggedIn">
+  <button class="btn btn-danger" (click)="logout()">logout</button>
+</div>
+<div *ngIf="!loggedIn">
+  <div class="container">
+    <button class="btn" [ngClass]="{current: toggleForm}"
+    (click)="toggleT()">Login Form</button><button class="btn" [ngClass]="{current: !toggleForm}" (click)="toggleF()">Sign Up Form</button>
+  </div>
+  <div class="container" *ngIf="toggleForm">
+      <span class="error" *ngIf="error" ></span>
+      <form #loginForm='ngForm' (ngSubmit)="login(loginForm)">
+        <div class="form-group">
+          <input type="text" placeholder="Email address..." [(ngModel)]="email" name="email" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" class="form-control" required />
+        </div>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">
+          Login
+        </button>
+    </form>
+    <div class="login-error" *ngIf="loginError">{{ loginError }}</div>
+  </div>
+  <div class="container" *ngIf="!toggleForm">
+    <span class="error" *ngIf="error" ></span>
+    <form #signupForm='ngForm' (ngSubmit)="signup(signupForm)">
+      <div class="form-group">
+        <input type="text" placeholder="Email address..." [(ngModel)]="email" name="email" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" [disabled]="!signupForm.valid" class="btn btn-primary">Create Account</button>
+    </form>
+    <div class="signup-error" *ngIf="signupError">{{ signupError }}</div>
+  </div>
+</div>
+<div class="container top" *ngIf="loggedIn">
+  <h2>You are currently logged in...</h2>
+</div>

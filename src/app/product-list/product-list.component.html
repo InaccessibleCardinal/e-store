@@ -1,0 +1,122 @@
+<div class="wrapper">
+  <div class="filter-box">
+  <h4>FILTERS:</h4>
+    <ul>
+      <li *ngFor="let cat of categories">
+        <button class="cat-filter"
+        [ngClass]="{selected: this.productsDisplayed === cat.toUpperCase()}"
+        (click)="filterByCat(cat)">
+          {{ cat }}
+        </button>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <button
+        class="cat-filter"
+        [ngClass]="{selected: sizeDisplayed === 17}"
+        (click)="laptopSizeFilter(17)"
+        >17-inch Laptops</button>
+      </li>
+      <li>
+        <button
+        class="cat-filter"
+        [ngClass]="{selected: sizeDisplayed === 16}"
+        (click)="laptopSizeFilter(16)"
+        >16-inch Laptops</button>
+      </li>
+      <li>
+        <button
+        class="cat-filter"
+        [ngClass]="{selected: sizeDisplayed === 15}"
+        (click)="laptopSizeFilter(15)"
+        >15-inch Laptops</button>
+      </li>
+      <li>
+        <button
+        class="cat-filter"
+        [ngClass]="{selected: sizeDisplayed === 14}"
+        (click)="laptopSizeFilter(14)"
+        >14-inch Laptops</button>
+      </li>
+    </ul>
+    <div>
+      <button class="cat-filter price"
+      (click)="sortPrice()">
+        Price: {{ priceSortVar }}
+      </button>
+    </div>
+    <ul>
+      <li>
+        <label>Eco-Friendly:</label>
+        <input type="checkbox"
+        class="feature-filters"
+        [(ngModel)]="featureFilter['eco-friendly']"
+        [value]="'eco-friendly'"
+        (change)="updateFeatureFilter($event)"/>
+      </li>
+      <li>
+        <label>Multi-Device:</label>
+        <input type="checkbox"
+        class="feature-filters"
+        [(ngModel)]="featureFilter['multi-device']"
+        [value]="'multi-device'"
+        (change)="updateFeatureFilter($event)"/>
+      </li>
+      <li>
+        <label>Weather Resistant:</label>
+        <input type="checkbox"
+        class="feature-filters"
+        [(ngModel)]="featureFilter['weather-resistant']"
+        [value]="'weather-resistant'"
+        (change)="updateFeatureFilter($event)"/>
+      </li>
+      <li>
+        <label>Best Protection:</label>
+        <input type="checkbox"
+        class="feature-filters"
+        [(ngModel)]="featureFilter.protection"
+        [value]="'protection'"
+        (change)="updateFeatureFilter($event)"/>
+      </li>
+    </ul>
+    <button class="cat-filter clear"
+    (click)="clearFilters()">
+      Clear Filters
+    </button>
+  </div>
+  <!-- <app-product-filter
+  [headerChange]="headerChange"
+  [featureFilter]="featureFilter"
+  [filterByCat]="filterByCat"
+  [sortPrice]="sortPrice"
+  [resetFeatureFilters]="resetFeatureFilters"
+  [laptopSizeFilter]="laptopSizeFilter"
+  [updateFeatureFilter]="updateFeatureFilter"
+  [clearFilters]="clearFilters"
+  ></app-product-filter> -->
+  <div class="products">
+    <div id="header-container">
+      <h2 class="products-header">{{ productsDisplayed }}</h2>
+    </div>
+    <div class="product-grid">
+      <div class="flex-product"
+      *ngFor="let p of (products | paginate:{itemsPerPage:perPage, currentPage:p })">
+          <span class="cart-flag"
+          *ngIf="isProductInCart(p)">
+            IN CART
+          </span>
+          <img src="assets/images/{{ p.images[0] }}" (click)="selectProd(p)"/>
+          <h3>{{ p.name }}</h3>
+          <span>{{ p.price | currency:'USD':true }}</span>
+          <button class="btn btn-primary" (click)="selectProd(p)">View Details</button>
+          <button class="btn btn-info"
+          (click)="compare(p)">+ Compare</button>
+        </div>
+      </div>
+    <div *ngIf="filterTooNarrow">
+      <h2>Sorry, no product/s satisfy this filter combination. Try a broader selection.</h2>
+    </div>
+    <pagination-controls class="page-controls" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>

@@ -1,0 +1,16 @@
+<nav>
+  <h1>E-Store</h1>
+    <ul class="nav" >
+      <li class="nav-items"><a routerLink="">Home</a></li>
+      <li class="nav-items"><a routerLink="login">Login / Sign Up</a></li>
+      <li class="nav-items">
+        <a routerLink="cart">Shopping Cart</a>
+        <span *ngIf="lines.length">( {{ lines.length }} )</span>
+      </li>
+      <li *ngIf="logIn()">Logged in as {{ getEmail() }} <button (click)="logout()">Logout</button></li>
+      <li *ngIf="logIn()">
+        <a routerLink="dashboard">Your Info / Orders</a>
+      </li>
+    </ul>
+  <div class="compare" *ngIf="comparisonQueue.length > 1"><a routerLink="compare">Comparison Matrix</a></div>
+</nav>

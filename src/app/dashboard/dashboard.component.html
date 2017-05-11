@@ -1,0 +1,68 @@
+<div class="container">
+<h2 class="greeting">Hello {{ dbUser.firstName }}!</h2>
+  <h4>Your Information:</h4>
+  <div class="user-data" *ngIf="!editMode">
+    <p>{{ dbUser.firstName }} {{ dbUser.lastName }}</p>
+    <p>
+      {{ dbUser.address.number }}
+      {{ dbUser.address.street }}
+      {{ dbUser.address.city }},
+      {{ dbUser.address.state }}
+      {{ dbUser.address.zip }}
+    </p>
+    <button class="btn btn-danger" (click)="edit()">Edit?</button>
+  </div>
+  <div class="user-data" *ngIf="editMode">
+    <form #personalForm (ngSubmit)="updateUser(personalForm)">
+      <div class="form-group">
+        <label>First Name:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.firstName" name="firstName" />
+        <label>Last Name:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.lastName" name="lastName" />
+      </div>
+      <div class="form-group">
+        <label>Street:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.address.street" name="addressStreet" />
+        <label>House/Unit Number:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.address.number" name="addressNumber" />
+        <label>City:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.address.city" name="addressCity" />
+        <label>State:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.address.state" name="addressState" />
+        <label>Zip Code:</label>
+        <input type="text" class="form-control"
+        [(ngModel)]="dbUser.address.zip" name="addressZip" />
+      </div>
+      <button type="submit" class="btn btn-success">Update</button>
+      <button class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+  <div class="orders">
+    <h4>Your Orders:</h4>
+    <div *ngIf="!orders">You have no orders yet.</div>
+    <div *ngIf="orders">
+      <div class="order" *ngFor="let o of orders">
+        <ul>
+          <li *ngFor="let line of o.lines">
+            {{ line.product.name }} @ {{ line.quantity }}
+          </li>
+        </ul>
+        <p>Status: {{ o.status }}</p>
+        <button [disabled]="o.status === 'cancelled'"
+        class="btn btn-danger"
+        (click)="cancelOrder(o)">Cancel?</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-dialog *ngIf="prompt"
+[(prompt)]="prompt"
+(hidePrompt)="getHidePrompt($event)"
+[order]="selectedOrder">
+</app-dialog>

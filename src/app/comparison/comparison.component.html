@@ -1,0 +1,65 @@
+<div class="container" *ngIf="products.length === 0">
+  <h1>Nothing to compare yet...</h1>
+</div>
+<div class="container" *ngIf="products.length > 0">
+  <h1>Comparison Matrix</h1>
+</div>
+<div class="container" *ngIf="products.length > 0">
+  <div *ngFor="let p of products">
+    <table>
+      <th>
+        <h4>{{ p.name }}</h4>
+      </th>
+      <tr class="button">
+        <td>
+          <button class="btn btn-danger" (click)="remove(p)">X</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="assets/images/{{p.images[0]}}" width="100px"/>
+        </td>
+      </tr>
+      <tr><td class="matrix-header">Specs</td></tr>
+      <tr >
+        <td class="{{ p.comparison['eco-friendly'] }}">
+          <span>Eco-Friendly:</span> {{ p.comparison['eco-friendly'] }}
+        </td>
+        </tr>
+        <tr >
+          <td class="{{ p.comparison['fits'] }}">
+            <span>Fits:</span> {{ p.comparison['fits'] }}
+          </td>
+        </tr>
+        <tr >
+          <td>
+            <span>Material:</span> {{ p.comparison['material'] }}
+          </td>
+        </tr>
+        <tr >
+          <td class="{{ p.comparison['multi-device'] }}">
+            <span>Multi-Device:</span> {{ p.comparison['multi-device'] }}
+          </td>
+        </tr>
+        <tr >
+          <td class="{{ p.comparison['protection'] }}">
+            <span>Protection:</span> {{ p.comparison['protection'] }}
+          </td>
+        </tr>
+        <tr >
+          <td class="{{ p.comparison['weather-resistant'] }}">
+            <span>Weather-Resistant:</span> {{ p.comparison['weather-resistant'] }}
+          </td>
+        </tr>
+        <tr >
+          <td>
+            <span>Weight:</span> {{ p.comparison['weight'] }}
+          </td>
+        </tr>
+        <tr><td class="matrix-header">Features</td></tr>
+        <tr *ngFor="let f of p.features">
+          <td>{{ f }}</td>
+        </tr>
+    </table>
+  </div>
+</div>

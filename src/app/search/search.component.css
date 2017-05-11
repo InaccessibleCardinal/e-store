@@ -1,0 +1,1 @@
+div{z-index:1;font-family:'Helvetica',Arial,sans-serif;padding:10px}div label{display:block}div .dropdown{position:absolute;background:#eee;width:97%}div .dropdown ul{width:100%}div .dropdown ul li{padding:10px;border-bottom:1px solid #ddd;transition:all 0.12s linear 0s !important}div .dropdown ul li:hover{background:#333;color:#fff;cursor:pointer}

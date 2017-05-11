@@ -1,0 +1,37 @@
+<div class="container">
+<div class="product-top">
+  <div class="left">
+    <div class="product-top-head">
+      <h2>{{ product.name }}</h2> <h4>{{ product.price | currency:'USD':true }}</h4>
+    </div>
+    <app-gallery [product]="product"></app-gallery>
+  </div>
+  <div class="left">
+    <h4 class="feature-headline">Features:</h4>
+    <div class="features-list" *ngFor="let f of product.features">
+      {{ f }}
+    </div>
+    <div class="buttons">
+      <button class="btn btn-success"
+      [disabled]="!checkProductVal"
+      (click)="add(product)" >Add to Cart</button>
+      <button class="btn btn-info"
+      (click)="compare(product)">+ Compare</button>
+      <span class="cart-alert" *ngIf="!checkProductVal">*The product is in your cart! You can update the quantity there.</span>
+    </div>
+  </div>
+</div>
+<div class="product-bottom">
+  <h4 class="feature-headline">Description</h4>
+  <p>{{product.description}}</p>
+  <h4 class="feature-headline">Specifications:</h4>
+  <ul>
+    <li><span>Color: </span>{{ product.specifications.color }}</li>
+    <li><span>Fits: </span>{{ product.specifications.fits }}</li>
+    <li><span>Material: </span>{{ product.specifications.material }}</li>
+    <li><span>Protection: </span>{{ product.specifications.protection }}</li>
+    <li><span>Warranty: </span>{{ product.specifications.warranty }}</li>
+    <li><span>Weight: </span>{{ product.specifications.weight }}</li>
+  </ul>
+</div>
+</div>
